@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js" defer></script>
+    <title>Library</title>
+</head>
+<body>
+    <div class="container">
+        <div class="library-header">
+            <header class="header">
+                <div class="logo"><i class="fas fa-book"></i>My library</div>
+                <button id="add-btn" class="btn btn-add">Add a book <i class="fas fa-plus"></i></button>
+            </header>
+            <div class="header">
+                <select name="filter" id="filter">
+                    <option value="all">All</option>
+                    <option value="read">Read only</option>
+                    <option value="newest">Newest first</option>
+                    <option value="oldest">Oldest first</option>
+                </select>
+                <input type="text" class="input-search" placeholder="Search book name">
+            </div>
+        </div>
+        <div id="library" class="library-content">
+        </div>
+        <div class="modal" id="modal">
+            <form action="" id="form" autocomplete="off">
+                <a class="close-btn" id="close-modal"><i class="fas fa-times"></i></a>
+                <h2 class="form-title">Book Information</h2>
+                <label for="title"> Title: 
+                    <input type="text" name="title" id="title" required>
+                </label>
+                <label for="author"> Author: 
+                    <input type="text" name="author" id="author" required>
+                </label>
+                <label for="pages"> Pages: 
+                    <input type="number" name="pages" id="pages" required>
+                </label>
+                <label for="read" class="radio" id="read"> Are you already read the book? 
+                    <label for="read-yes">Yes <input type="radio" name="read" id="read-yes" value="Yes" required></label>
+                    
+                    
+                    <label for="read-no">No <input type="radio" name="read" id="read-no" value="No" required></label>
+                </label>
+                <button id="send-btn" class="btn btn-form"><span>Send book info</span></button>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

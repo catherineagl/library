@@ -1,0 +1,199 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+.container {
+    width: 100vw;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 4rem 0;
+}
+
+.library-header {
+    width: 70%;
+    display: flex;
+    flex-direction: column;
+    border-bottom: .2rem solid cadetblue;
+    padding-bottom: 1rem;
+}
+
+.logo {
+    font-size: 2rem;
+}
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    font-size: 1.5rem;
+}
+
+/*library body*/
+.library-content {
+    width: 70%;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 1rem;
+    justify-content: space-evenly;
+}
+
+.library-content .book {
+    padding: 1.5rem 1rem;
+    background-color: darkcyan;
+    border-radius: 5px;
+    color: white;
+    width: 30%;
+    text-align: center;
+    position: relative;
+    margin: 1rem 0;
+}
+
+.book h3 {
+    font-weight: 200;
+}
+
+.book h3 span {
+    font-weight: 400;
+}
+
+/*Modal & form*/
+.modal {
+    position: fixed;
+    min-width: 100vw;
+    min-height: 100vh;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    visibility: hidden;
+    opacity: 0;
+    align-items: center;
+    justify-content: center;
+    transition:  visibility 0s, opacity .3s ease;
+}
+
+.modal.active {
+    visibility: visible;
+    opacity: 1;
+}
+
+form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 3rem;
+    border-radius: 5px;
+    background-color: #1e1e1e;
+    color: #f1f1f1;
+}
+
+form > label {
+    width: 100%;
+    margin-top: .5rem;
+}
+
+form input {
+    width: 100%;
+    padding: .5rem;
+    outline: none;
+    color: #1e1e1e;
+    font-weight: bold;
+    font-family: inherit;
+    border: none;
+    border-radius: 5px;
+    background: rgb(255,255,255);
+    background: linear-gradient(188deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
+    transition: all .3s ease;
+}
+
+form input:focus {
+    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
+}
+
+.radio {
+    display: flex;
+}
+
+.radio label {
+    width: 40%;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+
+/*buttons*/
+.trash-btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    color: #d84f4f;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+
+.close-btn {
+    position: absolute;
+    top: .5rem;
+    right: .5rem;
+    background-color: #d84f4f;
+    padding: .2rem .5rem;
+    color: white;
+    border: none;
+    outline: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn {
+    padding: .5rem 1rem;
+    border: none;
+    border-radius: 5px;
+    outline: none;
+    cursor: pointer;
+    background-color: darkcyan;
+    color: #fff;
+    transition: all 0.3s ease;
+    font-size: 1.2rem;
+}
+
+.btn-form {
+    margin-top: 1rem;
+}
+
+.btn:hover {
+    transform: scale(1.1);
+    background-color: cadetblue;
+}
+/*icons*/
+.green {
+    color: lightgreen;
+    cursor: pointer;
+}
+.red {
+    color: red;
+    cursor: pointer;
+}
+.trash {
+    font-size: 1.1rem;
+    pointer-events: none;
+}
+
+@media screen and (max-width: 1024px){
+    .library-content .book {
+        width: 45%;
+    }
+}
