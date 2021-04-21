@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
-
+/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+*/
 * {
     padding: 0;
     margin: 0;
@@ -27,6 +27,11 @@
 .logo {
     font-size: 2rem;
 }
+
+.logo i {
+    color: maroon;
+    padding-right: .5rem;
+}
 .header {
     display: flex;
     justify-content: space-between;
@@ -35,13 +40,48 @@
     font-size: 1.5rem;
 }
 
+.input-search {
+    border: none;
+    outline: none;
+    border-bottom: 1px solid darkcyan;
+    border-top: 1px solid darkcyan;
+    padding: .5rem;
+    font-size: 1rem;
+    transition: all 0.3s ease;
+}
+
+.input-search:focus {
+    border-top: none;
+    background-color: #f1f1f1;
+}
+
+.order-by {
+    display: flex;
+    align-items: center;
+
+}
+
+.order-by h3 {
+    font-size: 1rem;
+    font-weight: 200;
+    margin-right: .5rem;
+}
+
+.filter{
+    outline: none;
+    border: none;
+    border-bottom: 1px solid darkcyan;
+    border-top: 1px solid darkcyan;
+    padding: .5rem;
+    font-size: 1rem;
+    color: darkcyan;
+}
 /*library body*/
 .library-content {
     width: 70%;
     display: flex;
     flex-wrap: wrap;
     margin-top: 1rem;
-    justify-content: space-evenly;
 }
 
 .library-content .book {
@@ -49,10 +89,10 @@
     background-color: darkcyan;
     border-radius: 5px;
     color: white;
-    width: 30%;
+    width: 31%;
     text-align: center;
     position: relative;
-    margin: 1rem 0;
+    margin: 1rem .5rem;
 }
 
 .book h3 {
@@ -86,7 +126,7 @@
     opacity: 1;
 }
 
-form {
+.form {
     position: relative;
     display: flex;
     flex-direction: column;
@@ -98,27 +138,30 @@ form {
     color: #f1f1f1;
 }
 
-form > label {
+.form > label {
     width: 100%;
-    margin-top: .5rem;
+    margin-top: 1rem;
+    font-size: 1.2rem;
+
 }
 
-form input {
+.form input {
     width: 100%;
     padding: .5rem;
     outline: none;
     color: #1e1e1e;
-    font-weight: bold;
+    font-weight: 200;
     font-family: inherit;
+    font-size: 1.2rem;
     border: none;
     border-radius: 5px;
-    background: rgb(255,255,255);
-    background: linear-gradient(188deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
-    transition: all .3s ease;
+    margin-top: .5rem;
+    background: #ccc;
+    transition: all 0.3s ease;
 }
 
-form input:focus {
-    background: linear-gradient(0deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
+.form input:focus {
+    background: linear-gradient(188deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
 }
 
 .radio {
@@ -132,6 +175,23 @@ form input:focus {
     align-items: center;
 }
 
+.radio label input {
+    margin: auto;
+}
+/*Toast notification*/
+
+.toast {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+    padding: 1rem 2rem;
+    font-size: 1.2rem;
+    color: white;
+}
+
+.greenBg {
+    background-color: lightgreen;
+}
 
 /*buttons*/
 .trash-btn {
@@ -181,10 +241,12 @@ form input:focus {
 /*icons*/
 .green {
     color: lightgreen;
-    cursor: pointer;
 }
 .red {
     color: red;
+}
+
+.far {
     cursor: pointer;
 }
 .trash {
