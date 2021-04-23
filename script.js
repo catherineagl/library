@@ -8,23 +8,11 @@ const closeModal = document.getElementById('close-modal');
 const addBook = document.getElementById('add-btn');
 const modal = document.getElementById('modal');
 /*end modal variables*/
+/*filter options*/
 const searchBar = document.forms['search-book'].querySelector('input');
+const filterOptions = document.getElementById('filter');
 
-
-let myLibrary = [
-    {
-        title: "Book One",
-        author: "Author",
-        pages: "144",
-        read: true
-    },
-    {
-        title: "Book Two",
-        author: "Author Two",
-        pages: "256",
-        read: false
-    }
-];
+let myLibrary = [];
 
 class Book {
     constructor(title, author, pages, read) {
@@ -41,19 +29,18 @@ class Book {
     }
     showInfo() {
         return this._read ? `
-        <button class="trash-btn"><i class="fas fa-trash trash"></i></button>
+        <button class="trash-btn"><i class="fas fa-trash-alt trash"></i></button>
         <h2>${this._title}</h2>
         <h3>Author: <span>${this._author}</span></h3>
         <h3>Pages: <span>${this._pages}</span></h3>
         <h3>Read: <i class="far fa-check-circle green"></i></h3>`
         : `
-        <button class="trash-btn"><i class="fas fa-trash trash"></i></button>
+        <button class="trash-btn"><i class="fas fa-trash-alt trash"></i></button>
         <h2>${this._title}</h2>
         <h3>Author: <span>${this._author}</span></h3>
         <h3>Pages: <span>${this._pages}</span></h3>
         <h3>Read: <i class="far fa-times-circle red"></i></h3>`
     }
-
 }
 
 
@@ -81,6 +68,7 @@ const addBookToLibrary = (e) => {
     let read = document.querySelector('input[name="read"]:checked').value;
     read === "Yes" ? read = true : read = false
     myLibrary.push({title,author,pages,read});
+    saveToLocalStorage({title,author,pages,read})
     printBook();
     form.reset();
     showModal();
@@ -105,13 +93,15 @@ const changeReadStatusFalse = (e) => {
 
 const deleteBook = (e) => {
     let data = e.target.parentElement.dataset.id;
+    let book = e.target.parentElement;
     if(confirm('Are you sure you want to delete this book?')) {
-        delete myLibrary[data]
-        e.target.parentElement.remove();
-        toastNotification("removed")
+        delete myLibrary[data];
+        book.classList.add('fall');
+        clearLocalStorage(book);
+        book.addEventListener('transitionend', () => book.remove());
+        toastNotification("removed");
     }
     else return
-
 }
 
 const toastNotification = (action) => {
@@ -124,27 +114,99 @@ const toastNotification = (action) => {
     },3000)
 }
 
-const searchBook = () => {
-    
-}
-
-searchBar.addEventListener('keyup', (e) => {
-    const term = e.target.value.toLowerCase();
-    //console.log(term)
-})
-
-//================EVENTS
-
-sendBookBtn.addEventListener('click', addBookToLibrary);
-closeModal.addEventListener("click", showModal);
-addBook.addEventListener('click', showModal);
-document.addEventListener('click', (e) => {
+const btnInteraction = (e) => {
     if(e.target.classList.contains('far')) {
         if(e.target.classList.contains('green')) changeReadStatusTrue(e);
         else changeReadStatusFalse(e);
     };
     if(e.target.classList.contains('trash-btn')) deleteBook(e);
     else return;
-})
+}
 
+const searchBook = (e) => {
+    const term = e.target.value.toLowerCase();
+    const books = document.querySelectorAll('.book');
+    Array.from(books).forEach(book => {
+        const title = book.children[1].textContent;
+        if(title.toLowerCase().includes(term)) book.style.display = "block"
+        else book.style.display = "none"
+    })
+}
+
+
+const filterBooks = (e) => {
+    const books = library.childNodes;
+    books.forEach(book => {
+        const readStatus = book.children[4].children[0]
+        switch(e.target.value) {
+            case "all":
+                book.style.display = "block";
+                break;
+            case "read":
+                if(readStatus.classList.contains('green')) {
+                    book.style.display = "block";
+                } else {
+                    book.style.display = "none"
+                }
+                break;
+            case "unread":
+                if(readStatus.classList.contains('red')) {
+                    book.style.display = "block";
+                } else {
+                    book.style.display = "none"
+                }
+                break;
+        }
+    })
+}
+
+
+
+/*Local storage functions */
+const saveToLocalStorage = (book) => {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+    } else {    
+        books = JSON.parse(localStorage.getItem('books'))   
+    }
+    books.push(book);
+    localStorage.setItem('books', JSON.stringify(books))
+}
+
+const getBooks = () => {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+    } else {
+        books = JSON.parse(localStorage.getItem('books'))
+    }
+    books.forEach(book => {
+        myLibrary.push(book)
+    })
+}
+
+const clearLocalStorage = (book) => {
+    let books;
+    if(localStorage.getItem('books') === null) {
+        books = [];
+    } else {  
+        books = JSON.parse(localStorage.getItem('books'))
+    }
+    let index = book.children[1].textContent;
+    for(let x in books) {
+        if(books[x].title === index) {
+            books.splice(x,1)
+        }
+    }
+    localStorage.setItem('books', JSON.stringify(books))
+} 
+//================EVENTS
+window.addEventListener('DOMContentLoaded', getBooks);
+sendBookBtn.addEventListener('click', addBookToLibrary);
+closeModal.addEventListener("click", showModal);
+addBook.addEventListener('click', showModal);
+document.addEventListener('click', btnInteraction);
+searchBar.addEventListener('keyup', searchBook);
+filterOptions.addEventListener('click', filterBooks)
 addEventListener('DOMContentLoaded', printBook);

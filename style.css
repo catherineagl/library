@@ -1,5 +1,10 @@
-/*@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
-*/
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;600&display=swap');
+
+:root {
+    --main-color: #3982B3;
+    --second-color: #B33130;
+}
+
 * {
     padding: 0;
     margin: 0;
@@ -20,16 +25,16 @@
     width: 70%;
     display: flex;
     flex-direction: column;
-    border-bottom: .2rem solid cadetblue;
+    border-bottom: .2rem solid var(--second-color);
     padding-bottom: 1rem;
 }
 
 .logo {
-    font-size: 2rem;
+    font-size: 2.2rem;
 }
 
 .logo i {
-    color: maroon;
+    color: var(--second-color);
     padding-right: .5rem;
 }
 .header {
@@ -40,19 +45,33 @@
     font-size: 1.5rem;
 }
 
+.form-search {
+    display: flex;
+}
 .input-search {
     border: none;
     outline: none;
-    border-bottom: 1px solid darkcyan;
-    border-top: 1px solid darkcyan;
+    border-bottom: 1px solid var(--second-color);
+    border-top: 1px solid var(--second-color);
+    border-left: 1px solid var(--second-color);
     padding: .5rem;
     font-size: 1rem;
     transition: all 0.3s ease;
 }
 
+.input-search:hover {
+    background-color: #ccc;
+}
+
 .input-search:focus {
-    border-top: none;
     background-color: #f1f1f1;
+}
+
+.search {
+    padding: .8rem;
+    background-color: var(--second-color);
+    color: white;
+    font-size: 1rem;
 }
 
 .order-by {
@@ -67,14 +86,42 @@
     margin-right: .5rem;
 }
 
-.filter{
+select{
     outline: none;
     border: none;
-    border-bottom: 1px solid darkcyan;
-    border-top: 1px solid darkcyan;
+    appearance: none;
+}
+
+.select {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    border-bottom: 1px solid var(--second-color);
+    border-top: 1px solid var(--second-color);
+}
+select {
+    color: #1e1e1e;
+    width: 10rem;
+    cursor: pointer;
     padding: .5rem;
     font-size: 1rem;
-    color: darkcyan;
+}
+
+.select::after {
+    content: "\25BC";
+    position: absolute;
+    background-color: white;
+    color: var(--second-color);
+    top: 0;
+    right: 0;
+    padding: .2rem;
+    pointer-events: none;
+    transition: all 0.3s ease;
+}
+
+.select:hover::after {
+    background-color: var(--second-color);
+    color: white;
 }
 /*library body*/
 .library-content {
@@ -86,16 +133,25 @@
 
 .library-content .book {
     padding: 1.5rem 1rem;
-    background-color: darkcyan;
+    background-color: var(--main-color);
+    box-shadow: 3px 3px 3px rgba(0, 0, 0, .8);
     border-radius: 5px;
-    color: white;
+    color: #fff;
     width: 31%;
-    text-align: center;
+    text-align: justify;
     position: relative;
     margin: 1rem .5rem;
+    transition: all 0.3s ease;
 }
 
+.library-content .book:hover {
+    background-color: #3fa4e7;
+}
+.book h2 {
+    text-align: center;
+}
 .book h3 {
+    font-weight: 1.5rem;
     font-weight: 200;
 }
 
@@ -103,6 +159,9 @@
     font-weight: 400;
 }
 
+.book h3:last-child {
+    text-align: right;
+}
 /*Modal & form*/
 .modal {
     position: fixed;
@@ -134,7 +193,7 @@
     align-items: center;
     padding: 3rem;
     border-radius: 5px;
-    background-color: #1e1e1e;
+    background-color: var(--second-color);
     color: #f1f1f1;
 }
 
@@ -150,20 +209,15 @@
     padding: .5rem;
     outline: none;
     color: #1e1e1e;
-    font-weight: 200;
+    font-weight: 400;
     font-family: inherit;
     font-size: 1.2rem;
     border: none;
     border-radius: 5px;
     margin-top: .5rem;
-    background: #ccc;
+    background: #f1f1f1;
     transition: all 0.3s ease;
 }
-
-.form input:focus {
-    background: linear-gradient(188deg, rgba(255,255,255,1) 0%, rgba(120,120,120,1) 81%);
-}
-
 .radio {
     display: flex;
 }
@@ -190,7 +244,7 @@
 }
 
 .greenBg {
-    background-color: lightgreen;
+    background-color: rgb(61, 214, 61);
 }
 
 /*buttons*/
@@ -198,20 +252,34 @@
     position: absolute;
     top: .5rem;
     right: .5rem;
-    color: #d84f4f;
+    color: rgb(248, 56, 56);
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
+    width: max-content;
+    background-color: transparent;
+}
+
+.trash {
+    font-size: 1.2rem;
+    pointer-events: none;
+    font-weight: normal;
+}
+
+/*trash button animation*/
+.fall {
+    transform: translateY(8rem) rotateZ(20deg);
+    opacity: 0;
 }
 
 .close-btn {
     position: absolute;
     top: .5rem;
     right: .5rem;
-    background-color: #d84f4f;
+    background-color: #fff;
     padding: .2rem .5rem;
-    color: white;
+    color: crimson;
     border: none;
     outline: none;
     border-radius: 5px;
@@ -224,7 +292,7 @@
     border-radius: 5px;
     outline: none;
     cursor: pointer;
-    background-color: darkcyan;
+    background-color: var(--main-color);
     color: #fff;
     transition: all 0.3s ease;
     font-size: 1.2rem;
@@ -236,23 +304,29 @@
 
 .btn:hover {
     transform: scale(1.1);
-    background-color: cadetblue;
+    background-color: #45B4FF;
 }
 /*icons*/
 .green {
-    color: lightgreen;
+    font-weight: bold;
+    color: rgb(61, 214, 61);
+    background-color: #fff;
+    padding: .08rem;
+    border-radius: 50%;
 }
 .red {
+    font-weight: bold;
     color: red;
+    
+    background-color: #fff;
+    padding: .08rem;
+    border-radius: 50%;
 }
 
 .far {
     cursor: pointer;
 }
-.trash {
-    font-size: 1.1rem;
-    pointer-events: none;
-}
+
 
 @media screen and (max-width: 1024px){
     .library-content .book {
