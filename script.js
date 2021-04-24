@@ -11,6 +11,7 @@ const modal = document.getElementById('modal');
 /*filter options*/
 const searchBar = document.forms['search-book'].querySelector('input');
 const filterOptions = document.getElementById('filter');
+const showSearch = document.querySelector('.search');
 
 let myLibrary = [];
 
@@ -201,6 +202,10 @@ const clearLocalStorage = (book) => {
     }
     localStorage.setItem('books', JSON.stringify(books))
 } 
+
+const showSearchBar = () => {
+    searchBar.classList.toggle('active');
+}
 //================EVENTS
 window.addEventListener('DOMContentLoaded', getBooks);
 sendBookBtn.addEventListener('click', addBookToLibrary);
@@ -210,3 +215,4 @@ document.addEventListener('click', btnInteraction);
 searchBar.addEventListener('keyup', searchBook);
 filterOptions.addEventListener('click', filterBooks)
 addEventListener('DOMContentLoaded', printBook);
+showSearch.addEventListener('click', showSearchBar)
